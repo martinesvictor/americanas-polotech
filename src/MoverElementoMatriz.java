@@ -1,9 +1,23 @@
 public class MoverElementoMatriz {
     public static void main(String[] args) {
         Character[][] mat = new Character[3][3];
-        mat[0][1] = 'X';
+        mat[0][0] = 'X';
 
 //        encontrar(mat);
+        imprimir(mat);
+        mover(mat);
+        imprimir(mat);
+        mover(mat);
+        imprimir(mat);
+        mover(mat);
+        imprimir(mat);
+        mover(mat);
+        imprimir(mat);
+        mover(mat);
+        imprimir(mat);
+        mover(mat);
+        imprimir(mat);
+        mover(mat);
         imprimir(mat);
         mover(mat);
         imprimir(mat);
@@ -46,6 +60,7 @@ public class MoverElementoMatriz {
         for (int i = linha; i < mat.length; i++) {
             if (coluna == mat.length - 1) {
                 moverParaBaixoEComeco(mat);
+                coluna = 0;
                 break;
             }
             for (int j = coluna; j < mat[i].length - 1; j++) {
@@ -73,6 +88,13 @@ public class MoverElementoMatriz {
     }
 
     private static void moverParaBaixoEComeco(Character[][] mat) {
+        int[] posicao = encontrar(mat);
+        int linha = posicao[0];
+        int coluna = posicao[1];
+
+        Character elemento = mat[linha][coluna];
+        mat[linha][coluna] = null;
+        mat[linha + 1][0] = elemento;
 
     }
 }
