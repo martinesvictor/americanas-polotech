@@ -1,26 +1,44 @@
 package Projeto;
 
-public class JogoDaVelha {
-    public static void main(String[] args) {
-        System.out.println("====== BEM-VINDO AO JOGO DA VELHA ======");
-        System.out.println("Escolha as posições de acordo com " +
-                "o número da Linha e Coluna quando solicitado.\nLinha é " +
-                "o valor na vertical e Coluna na horizontal.");
-        System.out.println("==========================================");
-        System.out.println("O Jogador 1 será o 'O' (círculo) e o Jogador 2 o 'X' (xis).");
+import java.util.Scanner;
 
+public class JogoDaVelha {
+
+    public static void main(String[] args) {
+        introducao();
 
         Character[][] matriz = new Character[3][3];
-        matriz[0][0] = 'X';
-        matriz[0][1] = 'O';
+        Scanner scanner = new Scanner(System.in);
 
-        imprimirTabuleiro(matriz);
-
-        System.out.println("Escolha a posição para começar com 'O': ");
+        for (int i = 0; i < 9; i++) {
+            imprimirTabuleiro(matriz);
+            if (i % 2 == 0) {
+                System.out.println("---------- Jogador 1 'O' ----------");
+            } else {
+                System.out.println("---------- Jogador 2 'X' ----------");
+            }
+            System.out.print("Escolha a posição da Linha [Horizontal]: ");
+            int linha = scanner.nextInt();
+            while (linha > 2 || linha < 0) {
+                System.out.print("Posição inválida. Digite novamente [0, 1, 2]: ");
+                linha = scanner.nextInt();
+            }
+            System.out.print("Escolha a posição da Coluna [Vertical]: ");
+            int coluna = scanner.nextInt();
+            while (coluna > 2 || coluna < 0) {
+                System.out.print("Posição inválida. Digite novamente [0, 1, 2]: ");
+                coluna = scanner.nextInt();
+            }
+            if (i % 2 == 0) {
+                matriz[linha][coluna] = 'O';
+            } else {
+                matriz[linha][coluna] = 'X';
+            }
+        }
     }
 
 
-    public static void imprimirTabuleiro(Character[][] matriz){
+    public static void imprimirTabuleiro(Character[][] matriz) {
         System.out.println("  0   1   2");
         for (int indiceLinha = 0; indiceLinha < matriz.length; indiceLinha++) {
             Character[] linha = matriz[indiceLinha];
@@ -44,10 +62,14 @@ public class JogoDaVelha {
             System.out.println();
         }
     }
-    public static int[] escolherPosicao(int linha, int coluna){
-        int[] posicao = new int[2];
-        posicao[1] = linha;
-        posicao[2] = coluna;
-        return posicao;
+
+    public static void introducao() {
+        System.out.println("=-=-=-=-=-= BEM-VINDO AO JOGO DA VELHA =-=-=-=-=-=");
+        System.out.println("Escolha as posições de acordo com " +
+                "o número da Linha e Coluna quando solicitado.\nLinha é " +
+                "o valor na [Horizontal] e Coluna na [Vertical].");
+        System.out.println("==================================================");
+        System.out.println("O Jogador 1 será o 'O' (círculo) e o Jogador 2 o 'X' (xis).");
+        System.out.println("-------------------- TABULEIRO -------------------");
     }
 }
