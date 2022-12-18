@@ -7,67 +7,103 @@ public class JogoDaVelha {
     public static void main(String[] args) {
         introducao();
 
-        Character[][] matriz = new Character[3][3];
+        String[][] matriz = new String[3][3];
         Scanner scanner = new Scanner(System.in);
         int linha, coluna;
-        boolean acabou = false;
+        String continuar = "";
+        boolean vitoria = false, empate = false;
 
-        for (int i = 0; i < 9; i++) {
-            int jogador;
-            imprimirTabuleiro(matriz);
-            if (i % 2 == 0) {
-                jogador = 1;
-                System.out.printf("---------- Jogador %d 'O' ----------\n", jogador);
-            } else {
-                jogador = 2;
-                System.out.printf("---------- Jogador %d 'X' ----------\n", jogador);
-            }
-            do {
-                System.out.print("Escolha a posição da Linha [Horizontal]: ");
-                linha = scanner.nextInt();
+        do {
+            for (int i = 0; i < 9; i++) {
+                int jogador;
+                String simbolo;
+                imprimirTabuleiro(matriz);
+                if (i % 2 == 0) {
+                    jogador = 1;
+                    simbolo = "O";
+                    System.out.printf("------------- Jogador %d '%s' -------------\n", jogador, simbolo);
+                } else {
+                    jogador = 2;
+                    simbolo = "X";
+                    System.out.printf("------------- Jogador %d '%s' -------------\n", jogador, simbolo);
+                }
+                do {
+                    System.out.print("Escolha a posição da Linha [Horizontal]: ");
+                    linha = scanner.nextInt();
 
-                System.out.print("Escolha a posição da Coluna [Vertical]: ");
-                coluna = scanner.nextInt();
-            } while (linha < 0 || linha > 2 || coluna < 0 || coluna > 2 || matriz[linha][coluna] != null);
+                    System.out.print("Escolha a posição da Coluna [Vertical]: ");
+                    coluna = scanner.nextInt();
+                } while (linha < 0 || linha > 2 || coluna < 0 || coluna > 2 || matriz[linha][coluna] != null);
 
-            if (i % 2 == 0) {
-                matriz[linha][coluna] = 'O';
-            } else {
-                matriz[linha][coluna] = 'X';
-            }
-            if (i > 3) {
-                for (int j = 0; j < 3; j++) {
-                    for (int k = 0; k < 3; k++) {
-                        if ((matriz[k][0] == matriz[k][1] && matriz[k][1] == matriz[k][2]) ||
-                                (matriz[0][k] == matriz[1][k] && matriz[1][k] == matriz[2][k]) ||
-                                (matriz[0][0] == matriz[1][1] && matriz[1][1] == matriz[2][2]) ||
-                                (matriz[0][2] == matriz[1][1] && matriz[1][1] == matriz[2][0])) {
-                            acabou = true;
+                matriz[linha][coluna] = simbolo;
+
+                if (i > 3) {
+                    for (int j = 0; j < 3; j++) {
+                        for (int k = 0; k < 3; k++) {
+                            if ((matriz[j][0] == "X" && matriz[j][1] == "X" && matriz[j][2] == "X") ||
+                                    (matriz[j][0] == "O" && matriz[j][1] == "O" && matriz[j][2] == "O") ||
+                                    (matriz[0][k] == "X" && matriz[1][k] == "X" && matriz[2][k] == "X") ||
+                                    (matriz[0][k] == "O" && matriz[1][k] == "O" && matriz[2][k] == "O") ||
+                                    (matriz[0][0] == "X" && matriz[1][1] == "X" && matriz[2][2] == "X") ||
+                                    (matriz[0][0] == "O" && matriz[1][1] == "O" && matriz[2][2] == "O") ||
+                                    (matriz[0][2] == "X" && matriz[1][1] == "X" && matriz[2][0] == "X") ||
+                                    (matriz[0][2] == "O" && matriz[1][1] == "O" && matriz[2][0] == "O")) {
+                                vitoria = true;
+                                break;
+                            } else if (i > 7) {
+                                empate = true;
+                                break;
+                            }
+                        }
+                        if (vitoria || empate) {
                             break;
                         }
                     }
-                    if (acabou == true) {
-                        break;
-                    }
+                }
+                if (vitoria) {
+                    imprimirTabuleiro(matriz);
+                    System.out.printf("* * * * O Jogador %d '%s' GANHOU!! * * * *\n", jogador, matriz[linha][coluna]);
+                    break;
+                } else if (empate) {
+                    imprimirTabuleiro(matriz);
+                    System.out.println("_ _ _ _ _ O jogo empatou _ _ _ _ _");
+                    break;
                 }
             }
-            if (acabou == true) {
-                imprimirTabuleiro(matriz);
-                System.out.printf("* * * * O Jogador %d '%s' GANHOU!! * * * *\n", jogador, matriz[linha][coluna]);
-                break;
+
+            while(true) {
+                System.out.print("Deseja jogar novamente, [s] para Sim ou [n] para Não? ");
+                continuar = scanner.next().toUpperCase().trim();
+                if (continuar.equals("S") || continuar.equals("N")){
+                    break;
+                }
             }
-        }
+
+            if (continuar.equals("S")) {
+                vitoria = false;
+                empate = false;
+                for (int j = 0; j < 3; j++) {
+                    for (int k = 0; k < 3; k++) {
+                        matriz[j][k] = null;
+                    }
+                }
+                System.out.println("------------------ NOVO TABULEIRO -----------------");
+            }
+            if (continuar.equals("N")){
+                System.out.println("---> Jogo encerrado. Obrigado por jogar! <---");
+            }
+        } while (continuar.equals("S"));
     }
 
 
-    public static void imprimirTabuleiro(Character[][] matriz) {
+    public static void imprimirTabuleiro(String[][] matriz) {
         System.out.println("  0   1   2");
         for (int indiceLinha = 0; indiceLinha < matriz.length; indiceLinha++) {
-            Character[] linha = matriz[indiceLinha];
+            String[] linha = matriz[indiceLinha];
             System.out.print(indiceLinha + " ");
 
             for (int indiceColuna = 0; indiceColuna < matriz[indiceLinha].length; indiceColuna++) {
-                Character elemento = matriz[indiceLinha][indiceColuna];
+                String elemento = matriz[indiceLinha][indiceColuna];
 
                 if (elemento == null) {
                     System.out.print(" ");
