@@ -10,7 +10,7 @@ public class JogoDaVelha {
         String[][] matriz = new String[3][3];
         Scanner scanner = new Scanner(System.in);
         int linha, coluna;
-        String continuar = "";
+        String continuar;
         boolean vitoria = false, empate = false;
 
         do {
@@ -28,11 +28,26 @@ public class JogoDaVelha {
                     System.out.printf("------------- Jogador %d '%s' -------------\n", jogador, simbolo);
                 }
                 do {
-                    System.out.print("Escolha a posição da Linha [Horizontal]: ");
-                    linha = scanner.nextInt();
+                    try {
+                        System.out.print("Escolha a posição da Linha [Horizontal]: ");
+                        while (!scanner.hasNextInt()) {
+                            System.out.print("Posição inválida. Digite [0, 1, 2] para posição da Linha: ");
+                            scanner.nextLine();
+                        }
+                        linha = Integer.parseInt(scanner.nextLine());
 
-                    System.out.print("Escolha a posição da Coluna [Vertical]: ");
-                    coluna = scanner.nextInt();
+                        System.out.print("Escolha a posição da Coluna [Vertical]: ");
+                        while (!scanner.hasNextInt()) {
+                            System.out.print("Posição inválida. Digite [0, 1, 2] para posição da Coluna: ");
+                            scanner.nextLine();
+                        }
+                        coluna = Integer.parseInt(scanner.nextLine());
+
+                    } catch (NumberFormatException NFE) {
+                        System.out.println("Posição inválida. Tente novamente apenas com os números [0, 1, 2].");
+                        linha = -1;
+                        coluna = -1;
+                    }
                 } while (linha < 0 || linha > 2 || coluna < 0 || coluna > 2 || matriz[linha][coluna] != null);
 
                 matriz[linha][coluna] = simbolo;
@@ -71,10 +86,10 @@ public class JogoDaVelha {
                 }
             }
 
-            while(true) {
-                System.out.print("Deseja jogar novamente, [s] para Sim ou [n] para Não? ");
-                continuar = scanner.next().toUpperCase().trim();
-                if (continuar.equals("S") || continuar.equals("N")){
+            while (true) {
+                System.out.print("Deseja jogar novamente? Digite [S] para Sim ou [N] para Não: ");
+                continuar = scanner.next().toUpperCase().strip();
+                if (continuar.equals("S") || continuar.equals("N")) {
                     break;
                 }
             }
@@ -89,7 +104,7 @@ public class JogoDaVelha {
                 }
                 System.out.println("------------------ NOVO TABULEIRO -----------------");
             }
-            if (continuar.equals("N")){
+            if (continuar.equals("N")) {
                 System.out.println("---> Jogo encerrado. Obrigado por jogar! <---");
             }
         } while (continuar.equals("S"));
@@ -125,7 +140,7 @@ public class JogoDaVelha {
         System.out.println("=-=-=-=-=-= BEM-VINDO AO JOGO DA VELHA =-=-=-=-=-=");
         System.out.println("Escolha as posições de acordo com " +
                 "o número da Linha e Coluna quando solicitado.\nLinha é " +
-                "o valor na [Horizontal] e Coluna na [Vertical].");
+                "o valor na [Horizontal] e Coluna na [Vertical]. Digite apenas [0, 1, 2].");
         System.out.println("==================================================");
         System.out.println("O Jogador 1 será o 'O' (círculo) e o Jogador 2 o 'X' (xis).");
         System.out.println("-------------------- TABULEIRO -------------------");
