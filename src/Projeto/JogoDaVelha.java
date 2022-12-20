@@ -6,18 +6,21 @@ public class JogoDaVelha {
 
     public static void main(String[] args) {
         introducao();
-
-        String[][] matriz = new String[3][3];
-        Scanner scanner = new Scanner(System.in);
-        int linha, coluna;
         String continuar;
-        boolean vitoria = false, empate = false;
 
         do {
+            String[][] matriz = new String[3][3];
+            int linha;
+            int coluna;
+            continuar = null;
+            boolean vitoria = false, empate = false;
+            Scanner scanner = new Scanner(System.in);
+
             for (int i = 0; i < 9; i++) {
                 int jogador;
                 String simbolo;
                 imprimirTabuleiro(matriz);
+
                 if (i % 2 == 0) {
                     jogador = 1;
                     simbolo = "O";
@@ -27,6 +30,7 @@ public class JogoDaVelha {
                     simbolo = "X";
                     System.out.printf("------------- Jogador %d '%s' -------------\n", jogador, simbolo);
                 }
+
                 do {
                     try {
                         System.out.print("Escolha a posição da Linha [Horizontal]: ");
@@ -43,11 +47,16 @@ public class JogoDaVelha {
                         }
                         coluna = Integer.parseInt(scanner.nextLine());
 
-                    } catch (NumberFormatException NFE) {
-                        System.out.println("Posição inválida. Tente novamente apenas com os números [0, 1, 2].");
+                        if (matriz[linha][coluna] != null) {
+                            System.out.println("Posição já preenchida. Tente novamente.");
+                        }
+
+                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                        System.out.println("Posição inválida. Tente novamente apenas com os número [0, 1, 2].");
                         linha = -1;
                         coluna = -1;
                     }
+
                 } while (linha < 0 || linha > 2 || coluna < 0 || coluna > 2 || matriz[linha][coluna] != null);
 
                 matriz[linha][coluna] = simbolo;
