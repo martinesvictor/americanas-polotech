@@ -11,7 +11,7 @@ public class Conta {
     }
 
     public boolean sacar(double valor) {
-        if (this.saldo > valor) {
+        if (this.saldo >= valor) {
             this.saldo -= valor;
             System.out.println("Saque de " + valor + " reais realizado com sucesso.");
             return true;
