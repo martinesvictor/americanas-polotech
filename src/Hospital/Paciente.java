@@ -6,6 +6,13 @@ import java.util.Scanner;
 
 public class Paciente extends Pessoa {
 
+    public Paciente(){
+
+    }
+    public Paciente(String nome, String cpf) {
+        super(nome, cpf);
+    }
+
     public List<String> sintomas() {
         System.out.println(getNome() + " digite os seus sintomas. ");
 
@@ -24,7 +31,6 @@ public class Paciente extends Pessoa {
 
         } while (resposta.equals("S"));
 
-        System.out.println(listaDeSintomas); // remover
         return listaDeSintomas;
     }
 }

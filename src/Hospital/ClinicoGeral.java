@@ -1,4 +1,4 @@
 package Hospital;
 
-public class ClinicoGeral extends Medico{
+public class ClinicoGeral extends Medico {
 }

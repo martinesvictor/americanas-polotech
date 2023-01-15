@@ -2,12 +2,19 @@ package Hospital;
 
 import java.util.List;
 
-public class Medico extends Funcionario{
+public class Medico extends Funcionario {
 
+    public Medico() {
+    }
 
+    public Medico(String nome, String cpf) {
+        super(nome, cpf);
+    }
 
-    public String realizarDiagnostico(List<String> sintomas){
-        for (String i: sintomas) {
+    public String realizarDiagnostico(List<String> sintomas) {
+        System.out.println("-------------------------------");
+        System.out.println("De acordo com os seus sintomas: " + sintomas + ".");
+        for (String i : sintomas) {
             if (i.equals("fratura")) {
                 return "Você deve ser atendido por um Cirurgiao.";
             }
