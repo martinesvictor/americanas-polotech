@@ -1,6 +1,6 @@
 package Hospital;
 
-public class Atendimento {
+public class Atendimento extends Sala {
     private String urgencia;
 
     public Atendimento(){

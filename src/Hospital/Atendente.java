@@ -19,6 +19,7 @@ public class Atendente extends Funcionario {
         System.out.print("Digite o CPF do paciente (Somente Números): ");
         String cpfPaciente = scanner.nextLine();
         paciente.setCpf(cpfPaciente);
+        Fila.entrarNaFila(paciente);
     }
 
     @Override

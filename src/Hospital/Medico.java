@@ -22,7 +22,7 @@ public class Medico extends Funcionario {
                 return "Você deve ser atendido por um Neuro.";
             }
         }
-        return "Você deve ser atendido por um Clinico Geral.";
+        return "Você deve ser atendido(a) por um Clinico Geral.";
     }
 
 
