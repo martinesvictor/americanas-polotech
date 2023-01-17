@@ -1,33 +1,25 @@
 package Hospital;
 
-public class Fila extends Sala {
-    private static int posicao;
+public class Fila {
+    private static Integer tamanhoFila = 0;
 
 
-    public Fila() {
-
-    }
-
-    public Fila(Integer posicao) {
-        this.posicao = posicao;
-    }
-
+//    public Fila() {
+//
+//    }
 
     public static void entrarNaFila(Paciente paciente) {
-        posicao++;
-        System.out.println(paciente.getNome() + " você está na " + posicao + "ª posição da fila.");
+        tamanhoFila++;
+        System.out.println(paciente.getNome() + " você está na " + tamanhoFila + "ª posição da fila.");
     }
 
-    public static void chamarPacienteParaAtendimento(Paciente paciente){
-        posicao--;
-        System.out.println(paciente.getNome() + " você será atendido agora.");
+    public static void chamarPaciente(Paciente paciente){
+        tamanhoFila--;
+        System.out.println(paciente.getNome() + " você será atendido(a) agora.");
     }
 
-    public Integer getPosicao() {
-        return posicao;
+    public static Integer getTamanhoFila() {
+        return tamanhoFila;
     }
 
-    public void setPosicao(Integer posicao) {
-        this.posicao = posicao;
-    }
 }

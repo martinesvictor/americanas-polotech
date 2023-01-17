@@ -1,21 +1,21 @@
 package Hospital;
 
-public class Atendimento extends Sala {
-    private String urgencia;
+import java.util.Scanner;
+
+public class Atendimento {
+    private static String codigo;
+    /*  codigo VERDE - Não prioritário
+        codigo AMARELO - Prioritário
+        codigo VERMELHO - Urgente
+    */
 
     public Atendimento(){
 
     }
 
-    public Atendimento(String urgencia) {
-        this.urgencia = urgencia;
-    }
-
-    public String getUrgencia() {
-        return urgencia;
-    }
-
-    public void setUrgencia(String urgencia) {
-        this.urgencia = urgencia;
+    public static void prioridadeAtendimento(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Escolha a prioridade do atendimento, código [VERDE, AMARELO, VERMELHO]: ");
+        codigo = scanner.nextLine().toUpperCase();
     }
 }

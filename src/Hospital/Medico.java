@@ -11,6 +11,7 @@ public class Medico extends Funcionario {
         super(nome, cpf);
     }
 
+
     public String realizarDiagnostico(List<String> sintomas) {
         System.out.println("-------------------------------");
         System.out.println("De acordo com os seus sintomas: " + sintomas + ".");

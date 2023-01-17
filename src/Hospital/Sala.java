@@ -1,10 +1,8 @@
 package Hospital;
 
-import java.util.Scanner;
-
 public class Sala {
 
-    public Sala() {
+    private Sala() {
     }
 
     public static void reservar(int dia, int mes, int ano) {
