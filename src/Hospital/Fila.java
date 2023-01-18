@@ -4,9 +4,9 @@ public class Fila {
     private static Integer tamanhoFila = 0;
 
 
-//    public Fila() {
-//
-//    }
+    private Fila() {
+
+    }
 
     public static void entrarNaFila(Paciente paciente) {
         tamanhoFila++;
