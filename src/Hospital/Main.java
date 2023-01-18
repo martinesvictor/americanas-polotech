@@ -12,15 +12,15 @@ public class Main {
 
         System.out.println("+ + + Bem-vindo(a) ao Hospital + + +");
         atendente.iniciarAtendimento(paciente1);
-//        atendente.iniciarAtendimento(paciente2);
-//        Fila.chamarPaciente(paciente1);
-//        medico.realizarDiagnostico(paciente1.sintomas());
-//        Fila.chamarPaciente(paciente2);
-//        medico.realizarDiagnostico(paciente2.sintomas());
+        atendente.iniciarAtendimento(paciente2);
+        Fila.chamarPaciente(paciente1);
+        System.out.println(medico.realizarDiagnostico(paciente1.sintomas()));
+        Fila.chamarPaciente(paciente2);
+        System.out.println(medico.realizarDiagnostico(paciente2.sintomas()));
 //        Sala.reservar(12,12,2023);
         neuro.avaliarPaciente(paciente1);
         cirurgiao.realizarCirurgia(paciente2);
-        Fila.getTamanhoFila();
+        System.out.println(Fila.getTamanhoFila());
 
     }
 
