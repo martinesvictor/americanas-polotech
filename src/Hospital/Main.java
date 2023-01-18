@@ -6,6 +6,7 @@ public class Main {
         Paciente paciente2 = new Paciente("Julia", "123456789");
         Medico medico = new Medico();
         Neuro neuro = new Neuro();
+        ClinicoGeral clinicoGeral = new ClinicoGeral();
         Cirurgiao cirurgiao = new Cirurgiao();
         Atendente atendente = new Atendente();
 
@@ -21,7 +22,7 @@ public class Main {
         neuro.avaliarPaciente(paciente1);
         cirurgiao.realizarCirurgia(paciente2);
         System.out.println(Fila.getTamanhoFila());
+        clinicoGeral.receitarMedicamentos(paciente1);
 
     }
-
 }
