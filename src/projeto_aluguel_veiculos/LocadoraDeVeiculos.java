@@ -9,15 +9,15 @@ public class LocadoraDeVeiculos {
     public static void main(String[] args) {
 
 
-        String senha = null;
-        while (!Atendente.getSenha().equals(senha)) {
-            System.out.print("[Senha] para acessar o menu: ");
-            Scanner scanner = new Scanner(System.in);
-            senha = scanner.nextLine().toLowerCase();
-            if (!Atendente.getSenha().equals(senha)) {
-                System.out.println("* Incorreta. Tente novamente. *");
-            }
-        }
+//        String senha = null;
+//        while (!Atendente.getSenha().equals(senha)) {
+//            System.out.print("[Senha] para acessar o menu: ");
+//            Scanner scanner = new Scanner(System.in);
+//            senha = scanner.nextLine().toLowerCase();
+//            if (!Atendente.getSenha().equals(senha)) {
+//                System.out.println("# Incorreta. Tente novamente. #");
+//            }
+//        }
 
         String fecharMenu = "N";
         List<Veiculo> listaDeVeiculos = new ArrayList<>();
@@ -40,14 +40,63 @@ public class LocadoraDeVeiculos {
             int escolha = scanner.nextInt();
             if (escolha == 1) {
                 Veiculo novoVeiculo = Atendente.cadastrarVeiculo();
-                if (!listaDeVeiculos.contains(novoVeiculo)){
+                try {
+                    for (Veiculo veiculo : listaDeVeiculos) {
+                        if (veiculo.getPlaca().equals(novoVeiculo.getPlaca())) {
+                            throw new RuntimeException();
+                        }
+                    }
                     listaDeVeiculos.add(novoVeiculo);
                     System.out.println("Veículo Cadastrado com Sucesso!");
-                } else {
-                    System.out.println("Erro ao Cadastrar um novo Veículo.");
+                } catch (RuntimeException e) {
+                    System.out.println("# Erro. Veículo já Cadastrado. #");
                 }
             }
-            if(escolha == 8){
+            if (escolha == 2) {
+                scanner = new Scanner(System.in);
+                System.out.println(listaDeVeiculos);
+                System.out.print("Digite a Placa do Veículo que Deseja Alterar: ");
+                String alterarVeiculo = scanner.nextLine();
+                for (Veiculo veiculo : listaDeVeiculos) {
+                    if (veiculo.getPlaca().equals(alterarVeiculo)) {
+                        int sair = 1;
+                        while (sair == 1) {
+                            scanner = new Scanner(System.in);
+                            System.out.println("""
+                                    1- Alterar Nome do Veículo
+                                    2- Alterar Modelo do Veículo
+                                    3- Alterar Placa do Veículo
+                                    0- Sair""");
+                            System.out.print("Digite o Número p/ Escolher: ");
+                            int num = scanner.nextInt();
+                            if (num == 1) {
+                                scanner = new Scanner(System.in);
+                                System.out.print("Digite o Novo Nome: ");
+                                String novoNome = scanner.nextLine();
+                                veiculo.setNome(novoNome);
+                            }
+                            if (num == 2) {
+                                scanner = new Scanner(System.in);
+                                System.out.print("Digite o Novo Modelo: ");
+                                String novoModelo = scanner.nextLine();
+                                veiculo.setModelo(novoModelo);
+                            }
+                            if (num == 3) {
+                                scanner = new Scanner(System.in);
+                                System.out.print("Digite a Nova Placa: ");
+                                String novaPlaca = scanner.nextLine();
+                                veiculo.setPlaca(novaPlaca);
+                            }
+                            if (num == 0) {
+                                sair = num;
+                            }
+                            System.out.println(veiculo);
+                        }
+                    }
+                }
+            }
+
+            if (escolha == 8) {
                 System.out.println(listaDeVeiculos);
             }
             if (escolha == 0) {

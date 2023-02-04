@@ -26,7 +26,7 @@ public class Veiculo {
     }
 
     public void setModelo(String modelo) {
-            this.modelo = modelo;
+        this.modelo = modelo;
     }
 
     public String getPlaca() {
@@ -39,6 +39,6 @@ public class Veiculo {
 
     @Override
     public String toString() {
-        return "Nome do Veículo: " + nome + ", Modelo: " + modelo + ", Placa: " + placa;
+        return "Nome do Veículo: " + nome + ", Modelo: " + modelo + ", Placa: " + placa + "\n";
     }
 }
