@@ -1,8 +1,6 @@
 package projeto_aluguel_veiculos;
 
 
-import java.util.Scanner;
-
 public class LocadoraDeVeiculosMenu {
     public static void main(String[] args) {
 
@@ -30,21 +28,13 @@ public class LocadoraDeVeiculosMenu {
                 repositorioEmMemoriaDeVeiculos.alterarCadastroCliente();
             }
             if (escolha == 6) {
-                Scanner scanner = new Scanner(System.in);
-                System.out.print("""
-                        1- Cliente Pessoa Física
-                        2- Cliente Pessoa Jurídica
-                        Escolha o Tipo do Cliente (Número):\040""");
-                int tipoDoCliente = scanner.nextInt();
-                if (tipoDoCliente == 1) {
-                    clientePF.alugarVeiculo();
-                }
-                if (tipoDoCliente == 2) {
-                    clientePJ.alugarVeiculo();
-                }
+                repositorioEmMemoriaDeVeiculos.alugarVeiculo();
+            }
+            if (escolha == 7) {
+                repositorioEmMemoriaDeVeiculos.devolverVeiculo();
             }
             if (escolha == 8) {
-                System.out.println(repositorioEmMemoriaDeVeiculos.listarVeiculos());
+                repositorioEmMemoriaDeVeiculos.listarVeiculos();
             }
             if (escolha == 9) {
                 repositorioEmMemoriaDeVeiculos.listarClientes();

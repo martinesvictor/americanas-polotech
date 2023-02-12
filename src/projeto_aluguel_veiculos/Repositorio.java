@@ -26,8 +26,11 @@ public interface Repositorio {
 
     void alterarCadastroCliente();
     
-    List<Veiculo> listarVeiculos();
+    void listarVeiculos();
 
     void listarClientes();
 
+    void alugarVeiculo();
+
+    void devolverVeiculo();
 }
