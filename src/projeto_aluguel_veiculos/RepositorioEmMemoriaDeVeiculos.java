@@ -1,5 +1,7 @@
 package projeto_aluguel_veiculos;
 
+import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -288,9 +290,8 @@ public class RepositorioEmMemoriaDeVeiculos implements Repositorio {
     }
 
 
-
     @Override
-    public void devolverVeiculo(){
+    public void devolverVeiculo() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("""
                 1- Cliente Pessoa Física
@@ -299,6 +300,8 @@ public class RepositorioEmMemoriaDeVeiculos implements Repositorio {
         int tipoDoCliente = scanner.nextInt();
         if (tipoDoCliente == 1) {
             scanner = new Scanner(System.in);
+            System.out.print("Digite a Placa do Carro para Devolver: ");
+            String placaParaDevolver = scanner.nextLine();
             System.out.print("Digite o Local da Devolução do Veículo: ");
             String localDevolvido = scanner.nextLine();
             System.out.println("----- Digite a Data e o Horario do Aluguel -----");
@@ -313,7 +316,55 @@ public class RepositorioEmMemoriaDeVeiculos implements Repositorio {
             System.out.print("Minutos: ");
             int min = scanner.nextInt();
             LocalDateTime dataEHorarioDevolucao = LocalDateTime.of(ano, mes, dia, horas, min);
-            
+            for (Veiculo veiculo : listaDeVeiculos) {
+                if (veiculo.getPlaca().equals(placaParaDevolver)) {
+                    veiculo.setAlugado(false);
+                    Duration tempo = Duration.between(veiculo.getDataEHorarioQueFoiAlugado(), dataEHorarioDevolucao);
+                    BigDecimal total = veiculo.getValorDoVeiculo().multiply(BigDecimal.valueOf(tempo.toDays()));
+                    if ((tempo.toMinutes() % 60) > 0){
+                        total = veiculo.getValorDoVeiculo().multiply(BigDecimal.valueOf(tempo.toDays()+1));
+                    }
+                    if (tempo.toDays() > 4) {
+                        System.out.println("O Cliente Ganhou Desconto de 5%.");
+                        total = total.multiply(BigDecimal.valueOf(0.95));
+                    }
+                    System.out.println("O Cliente deve Pagar: R$" + total);
+                }
+            }
+        }
+        if (tipoDoCliente == 2) {
+            scanner = new Scanner(System.in);
+            System.out.print("Digite a Placa do Carro para Devolver: ");
+            String placaParaDevolver = scanner.nextLine();
+            System.out.print("Digite o Local da Devolução do Veículo: ");
+            String localDevolvido = scanner.nextLine();
+            System.out.println("----- Digite a Data e o Horario do Aluguel -----");
+            System.out.print("Dia: ");
+            int dia = scanner.nextInt();
+            System.out.print("Mês: ");
+            int mes = scanner.nextInt();
+            System.out.print("Ano: ");
+            int ano = scanner.nextInt();
+            System.out.print("Horas: ");
+            int horas = scanner.nextInt();
+            System.out.print("Minutos: ");
+            int min = scanner.nextInt();
+            LocalDateTime dataEHorarioDevolucao = LocalDateTime.of(ano, mes, dia, horas, min);
+            for (Veiculo veiculo : listaDeVeiculos) {
+                if (veiculo.getPlaca().equals(placaParaDevolver)) {
+                    veiculo.setAlugado(false);
+                    Duration tempo = Duration.between(veiculo.getDataEHorarioQueFoiAlugado(), dataEHorarioDevolucao);
+                    BigDecimal total = veiculo.getValorDoVeiculo().multiply(BigDecimal.valueOf(tempo.toDays()));
+                    if ((tempo.toMinutes() % 60) > 0){
+                        total = veiculo.getValorDoVeiculo().multiply(BigDecimal.valueOf(tempo.toDays()+1));
+                    }
+                    if (tempo.toDays() > 2) {
+                        System.out.println("O Cliente Ganhou Desconto de 10%.");
+                        total = total.multiply(BigDecimal.valueOf(0.90));
+                    }
+                    System.out.println("O Cliente deve Pagar: R$" + total);
+                }
+            }
         }
     }
 
@@ -326,7 +377,7 @@ public class RepositorioEmMemoriaDeVeiculos implements Repositorio {
                 contador++;
             }
         }
-        if (contador == 0){
+        if (contador == 0) {
             System.out.println("# Nenhum Veículo Disponível para Alugar. #");
         }
     }
